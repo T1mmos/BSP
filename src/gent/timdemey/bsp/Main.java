@@ -3,10 +3,15 @@ package gent.timdemey.bsp;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -50,14 +55,10 @@ public class Main implements Runnable
 		frame.setGlassPane(hudPane);
 		hudPane.setVisible(true);
 		hudPane.setOpaque(false);
-		
 		hudPane.Initialize();
 		
 		frame.setSize(600, 600);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
-		
-		
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);		
 		frame.setVisible(true);
 	}
 }

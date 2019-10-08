@@ -11,11 +11,10 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import gent.timdemey.bsp.EventBus;
-
 public class RenderPane extends JPanel implements IRenderer
-{
+{	
 	private List<RenderEvent> renderEvents = new ArrayList<>();
+	
 	
 	public void Render(final RenderEvent renderEvent)
 	{
@@ -51,13 +50,13 @@ public class RenderPane extends JPanel implements IRenderer
 	    
 	    if (event.announcement != null)
 	    {
-	    	g.setColor(new Color(event.red, 0, 0));
+	    	g.setColor(Color.red);
 	    	g.drawString(event.announcement, 150, 150);
 	    }
-	    if (event.mouseLocation != null)
-	    {
-	    	g.setColor(new Color(event.red, 255-event.red, 0));
-	    	g.fillOval(event.mouseLocation.x - 5, event.mouseLocation.y - 5, 10, 10);
-	    }
+	    
+	    // player
+    	g.setColor(new Color(200, 50, 0));
+    	g.fillOval(event.posX - 5, getHeight() - 1 - event.posY - 5, 10, 10);
+    
 	}
 }

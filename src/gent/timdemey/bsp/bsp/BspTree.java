@@ -23,33 +23,39 @@ public class BspTree
 	 */
 	public static BspTree build (List<BspLine> bspLines)
 	{
+		List<BspLine> copy = new ArrayList<>(bspLines);
+		return buildPriv (copy);
+	}
+	
+	private static BspTree buildPriv (List<BspLine> bspLines)
+	{
 		// pick a BSP line that will divide the space
-		BspLine splitter = bspLines.remove(bspLines.size() - 1);
-		
-		if (bspLines.size() == 0)
-		{
-			return new BspTree(splitter, null, null);
-		}
-		
-		List<BspLine> left = new ArrayList<>();
-		List<BspLine> right = new ArrayList<>();
-		
-		for (BspLine bspLine : bspLines)
-		{
-			BspLine[] splits = bspLine.split(splitter);
-			if (splits[0] != null)
-			{
-				left.add(splits[0]);
-			}
-			if (splits[1] != null)
-			{
-				right.add(splits[1]);
-			}
-		}
-		
-		BspTree leftNode = left.size() > 0 ? build(left) : null;
-		BspTree rightNode = right.size() > 0 ? build(right) : null;
-		
-		return new BspTree(splitter, leftNode, rightNode);
+				BspLine splitter = bspLines.remove(bspLines.size() - 1);
+				
+				if (bspLines.size() == 0)
+				{
+					return new BspTree(splitter, null, null);
+				}
+				
+				List<BspLine> left = new ArrayList<>();
+				List<BspLine> right = new ArrayList<>();
+				
+				for (BspLine bspLine : bspLines)
+				{
+					BspLine[] splits = bspLine.split(splitter);
+					if (splits[0] != null)
+					{
+						left.add(splits[0]);
+					}
+					if (splits[1] != null)
+					{
+						right.add(splits[1]);
+					}
+				}
+				
+				BspTree leftNode = left.size() > 0 ? buildPriv(left) : null;
+				BspTree rightNode = right.size() > 0 ? buildPriv(right) : null;
+				
+				return new BspTree(splitter, leftNode, rightNode);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import gent.timdemey.bsp.bsp.BspData;
 import gent.timdemey.bsp.bsp.BspIntersection;
 import gent.timdemey.bsp.bsp.BspLine;
 import gent.timdemey.bsp.bsp.BspTree;
@@ -392,15 +393,7 @@ class BspTest
 			{0,0},{1,1}
 		};
 		
-		List<BspLine> bspLines = new ArrayList<>();
-		for (int i = 0; i < points.length; i += 2)
-		{
-			double[] p1 = points[i];
-			double[] p2 = points[i + 1];
-			
-			BspLine bspLine = new BspLine(new BspPoint(p1[0], p1[1]), new BspPoint(p2[0], p2[1])); 
-			bspLines.add(bspLine);
-		}
+		List<BspLine> bspLines = BspData.CreateBspLines(points);
 		
 		BspTree bspNode = BspTree.build(bspLines);
 
