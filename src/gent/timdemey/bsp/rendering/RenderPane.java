@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,29 +35,14 @@ public class RenderPane extends JPanel implements IRenderer
         g.setRenderingHint(
             RenderingHints.KEY_ANTIALIASING,
             RenderingHints.VALUE_ANTIALIAS_ON); 
-        	    
-	    g.setFont(Font.decode("Tahoma 36 bold"));
-	    
-	    if (event == null || event.renderingState == RenderingState.Stopped)
+        
+        AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
+        tx.concatenate(AffineTransform.getTranslateInstance(0, -300));
+        g.setTransform(tx);
+        
+	    if (event != null && event.image != null)
 	    {
-	    	g.setColor(Color.black);
-	    	g.fillRect(0, 0, getWidth(), getHeight());
-	    	
-	    	g.setColor(Color.white);
-		    RenderUtils.DrawCenteredString(g, "No rendering active", getBounds());
-	    	
-	    	return;
+		    g.drawImage(event.image, 0, 0, null);
 	    }
-	    
-	    if (event.announcement != null)
-	    {
-	    	g.setColor(Color.red);
-	    	g.drawString(event.announcement, 150, 150);
-	    }
-	    
-	    // player
-    	g.setColor(new Color(200, 50, 0));
-    	g.fillOval(event.posX - 5, getHeight() - 1 - event.posY - 5, 10, 10);
-    
 	}
 }

@@ -116,17 +116,6 @@ public class HudPane extends JPanel implements MouseMotionListener, IRenderer
 		RegisterKey(KeyEvent.VK_D);
 	}
 	
-	protected void paintComponent(Graphics g) {
-   
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(
-            RenderingHints.KEY_ANTIALIASING,
-            RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        g2d.fillOval(50,50,100,100);
-	    
-	}
-	
 	@Override
 	public void Render(RenderEvent renderEvent)
 	{
